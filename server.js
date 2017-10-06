@@ -21,7 +21,9 @@ app.post("/push-notification", function(req, res) {
   const now = new Date()
   const nowStr = now.toLocaleString()
   const oneSignalConfig = require(`./src/.credential/onesignal-${appName}.json`)
-  const waitForSendNofication = sendNotification(oneSignalConfig)(`Hi there, see new push at: ${nowStr}`)
+  const waitForSendNofication = sendNotification(oneSignalConfig)(`Hi there, see new push at: ${nowStr}`, {
+    headings: { en: appName }
+  })
   waitForSendNofication.then(() => {
     res.json({ msg: "Test msg sent, please wait until 5s" })
   })
