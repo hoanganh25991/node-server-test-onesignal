@@ -9,7 +9,7 @@ bindCommonMiddleware(app)
 app.listen(port, () => console.log(`OneSignal running on port: ${port}`))
 
 app.get("/", (req, res) => {
-  res.send("Welcome to OneSignal")
+  res.sendFile(`${__dirname}/views/send-button.html`)
 })
 
 app.post("/push-notification", function(req, res) {

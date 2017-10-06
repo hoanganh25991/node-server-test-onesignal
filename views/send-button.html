@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OneSignal</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=0"/>
+    <meta name="theme-color" content="#000000">
+</head>
+<body>
+<div>
+    <h1>Welcome to OneSignal</h1>
+    <hr/>
+    <h3>Send test message</h3>
+    <div>
+        <input type="text" name="appName" placeholder="appName">
+        <input type="button" value="Send" onClick="sendByApp()">
+    </div>
+    <hr/>
+</div>
+<script>
+    const send = function(appName){
+        var data = JSON.stringify({appName});
+
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                console.log(this.responseText);
+            }
+        });
+
+        const url = `${window.location.href}push-notification`
+        xhr.open("POST", url);
+        xhr.setRequestHeader("content-type", "application/json");
+        xhr.onload = function(){alert(xhr.response)}
+        xhr.send(data);
+    }
+
+    const sendByApp = function(){
+        const appName = document.querySelector("input[name='appName']").value
+        send(appName)
+    }
+</script>
+</body>
+</html>
